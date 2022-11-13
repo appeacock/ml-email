@@ -4,10 +4,9 @@ import imaplib
 import email
 import time
 import json
-import sys
 
 global _EMAILDIR_
-_EMAILDIR_ = sys.argv[1]
+_EMAILDIR_ = "INBOX"
 
 
 start = time.time()
@@ -35,20 +34,5 @@ for directory in directories:
     except Exception as e:
         resp_code, mail_count = None, None
 
-resp_code, mail_count = imap_ssl.select(mailbox=_EMAILDIR_, readonly=True)
-resp_code, mail_ids = imap_ssl.search(None, "ALL")
-
-messages = []
-messages.append(count)
-for mail_id in mail_ids[0].decode().split():
-    content = ''
-    resp_code, mail_data = imap_ssl.fetch(mail_id, '(RFC822)') ## Fetch mail data.
-    message = email.message_from_bytes(mail_data[0][1])
-    for part in message.walk():
-        if part.get_content_type() == "text/plain":
-            body = part.get_payload(decode=True)
-    content = mail_id,message.get("From"),message.get("To"),message.get("Bcc"),message.get("Date"),message.get("Subject"),body.decode('utf-8')
-    messages.append(content)
-
 imap_ssl.close()
-print (json.dumps(messages))
+print (count)

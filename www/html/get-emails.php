@@ -7,19 +7,12 @@ require 'shared_functions.php';
 include ("static/header.html");
 include ("static/sidebar.html");
 include ("static/topbar.html");?>
-
-
 <!-- Start page content -->
+
 <div class="container-fluid">
-<h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-
-<?php
-    $output = run_('python3 /home/email/ml-email/python/get_emails.py');
-    echo $output;
-?>
-
+<h1 class="h3 mb-4 text-gray-800">Emails (<?php echo email_count("INBOX"); ?>)</h1>
+<?php display_email_table("INBOX"); ?>
 </div>
 
 <!-- End page content -->
-
 <?php include ("static/footer.html");?>
