@@ -19,6 +19,15 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <script language="JavaScript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('get_emails');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
 
 </head>
 
